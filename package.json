@@ -1,27 +1,53 @@
 {
-  "name": "notify_horse_entry",
+  "name": "ses_to_slack",
   "version": "0.1.0",
   "bin": {
-    "notify_horse_entry": "bin/notify_horse_entry.js"
+    "ses_to_slack": "bin/ses_to_slack.js"
   },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest",
-    "cdk": "cdk"
+    "test": "jest --coverage",
+    "cdk": "cdk",
+    "deploy:prod": "NODE_ENV=production AWS_DEFAULT_REGION=us-east-1 cdk deploy",
+    "deploy:dev": "NODE_ENV=develop AWS_DEFAULT_REGION=us-east-1 cdk deploy",
+    "destroy:prod": "NODE_ENV=production AWS_DEFAULT_REGION=us-east-1 cdk destroy",
+    "destroy:dev": "NODE_ENV=develop AWS_DEFAULT_REGION=us-east-1 cdk destroy"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.113.0",
-    "@types/jest": "^26.0.10",
-    "@types/node": "10.17.27",
-    "jest": "^26.4.2",
-    "ts-jest": "^26.2.0",
+    "@types/aws-lambda": "^8.10.80",
+    "@types/config": "0.0.39",
+    "@types/imap": "^0.8.35",
+    "@types/jest": "^26.0.0",
+    "@types/mailparser": "^3.0.3",
+    "@types/node": "^14.16.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
     "aws-cdk": "1.113.0",
-    "ts-node": "^9.0.0",
-    "typescript": "~3.9.7"
+    "eslint": "^7.30.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-import-resolver-node": "^0.3.4",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.4.0",
+    "jest": "^26.0.0",
+    "ts-jest": "^26.0.0",
+    "ts-node": "^10.0.0",
+    "typescript": "~4.3.0"
   },
   "dependencies": {
+    "@aws-cdk/aws-lambda": "1.113.0",
+    "@aws-cdk/aws-lambda-nodejs": "1.113.0",
+    "@aws-cdk/aws-s3": "1.113.0",
+    "@aws-cdk/aws-ses": "1.113.0",
+    "@aws-cdk/aws-ses-actions": "1.113.0",
+    "@aws-cdk/aws-sqs": "1.113.0",
     "@aws-cdk/core": "1.113.0",
+    "@aws-sdk/client-s3": "^3.25.0",
+    "@aws-sdk/client-sqs": "^3.25.0",
+    "aws-lambda": "^1.0.6",
+    "config": "^3.3.6",
+    "mailparser": "^3.3.0",
     "source-map-support": "^0.5.16"
   }
 }
