@@ -1,5 +1,5 @@
 import * as lambda from 'aws-lambda';
-import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { SQSClient, SendMessageBatchRequestEntry, SendMessageBatchCommand } from '@aws-sdk/client-sqs';
 import MessageFormatter from './lambda/message_formatter';
 
@@ -9,18 +9,35 @@ export const handler: lambda.SESHandler = async (event) => {
     throw new Error('Environment Variable [BUCKET] is not set.');
   }
 
+  const cdnBucketName = process.env.CDN_BUCKET ?? '';
+  if (cdnBucketName === '') {
+    throw new Error('Environment Variable [CDN_BUCKET] is not set.');
+  }
+
   const messages = await Promise.all(
     event.Records.map(async (record, index): Promise<SendMessageBatchRequestEntry> => {
+      const { messageId } = record.ses.mail;
       const s3 = new S3Client({});
       const output = await s3.send(
-        new GetObjectCommand({ Bucket: bucketName, Key: record.ses.mail.messageId }),
+        new GetObjectCommand({ Bucket: bucketName, Key: messageId }),
       );
+
+      const messageInfo = await MessageFormatter.format(output.Body);
+      const imageInfos = messageInfo.attachments.filter((x) => x.contentType.startsWith('image/'));
+      imageInfos.forEach((x) => {
+        s3.send(
+          new PutObjectCommand({ Bucket: cdnBucketName, Key: `${messageId}/${x.fileName}`, Body: x.content }),
+        );
+      });
 
       return {
         Id: `${index}`,
         MessageBody: JSON.stringify({
           webhookname: process.env.WEBHOOK_NAME,
-          message: await MessageFormatter.format(output.Body),
+          message: messageInfo.text,
+          images: imageInfos.map(
+            (x) => ({ imageUrl: `https://${process.env.CDN_DOMAIN}/${messageId}/${x.fileName}`, imageName: x.fileName }),
+          ),
         }),
       };
     }),
