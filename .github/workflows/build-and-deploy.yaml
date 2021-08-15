@@ -70,4 +70,4 @@ jobs:
           aws s3 sync ${{ secrets.CONFIG_URI }} config
       - name: Deploy
         if: startsWith(github.ref, 'refs/heads/main')
-        run: npm run deploy:prod -- --role-arn ${{ secrets.AWS_DEPLOY_ROLE }} 
+        run: npm run deploy:prod -- --role-arn ${{ secrets.AWS_DEPLOY_ROLE }} --verbose
