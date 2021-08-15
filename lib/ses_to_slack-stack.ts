@@ -1,5 +1,4 @@
 import * as cdk from '@aws-cdk/core';
-import { Duration } from '@aws-cdk/core';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as lambdaNodejs from '@aws-cdk/aws-lambda-nodejs';
 import * as ses from '@aws-cdk/aws-ses';
@@ -23,7 +22,7 @@ export class SesToSlackStack extends cdk.Stack {
     const bucket = new s3.Bucket(this, 's3', {
       lifecycleRules: [
         {
-          expiration: Duration.days(30),
+          expiration: cdk.Duration.days(30),
         },
       ],
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
