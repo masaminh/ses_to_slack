@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
-import * as cdk from '@aws-cdk/core';
+import { App } from 'aws-cdk-lib';
 import config from 'config';
 import { SesToSlackStack } from '../lib/ses_to_slack-stack';
 
-const app = new cdk.App();
+const app = new App();
 const stage = config.get<string>('stage');
 const stageName = `SesToSlackStack${stage ?? ''}`;
 new SesToSlackStack(app, stageName, {
