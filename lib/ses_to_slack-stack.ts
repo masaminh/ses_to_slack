@@ -1,20 +1,15 @@
-import { Construct } from 'constructs';
-import {
-  Stack,
-  StackProps,
-  Duration,
-  aws_cloudfront as cloudfront,
-  aws_lambda as lambda,
-  aws_lambda_nodejs as lambdaNodejs,
-  aws_s3 as s3,
-  aws_ses as ses,
-  aws_ses_actions as sesActions,
-  aws_sqs as sqs,
-} from 'aws-cdk-lib';
+import * as cdk from '@aws-cdk/core';
+import * as lambda from '@aws-cdk/aws-lambda';
+import * as lambdaNodejs from '@aws-cdk/aws-lambda-nodejs';
+import * as ses from '@aws-cdk/aws-ses';
+import * as sesActions from '@aws-cdk/aws-ses-actions';
+import * as s3 from '@aws-cdk/aws-s3';
+import * as sqs from '@aws-cdk/aws-sqs';
+import * as cloudfront from '@aws-cdk/aws-cloudfront';
 import config from 'config';
 
-export class SesToSlackStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+export class SesToSlackStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     const ruleSetName = config.get<string>('ruleSetName');
@@ -27,7 +22,7 @@ export class SesToSlackStack extends Stack {
     const bucket = new s3.Bucket(this, 's3', {
       lifecycleRules: [
         {
-          expiration: Duration.days(30),
+          expiration: cdk.Duration.days(30),
         },
       ],
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
@@ -51,7 +46,7 @@ export class SesToSlackStack extends Stack {
     });
 
     const lambdaFunction = new lambdaNodejs.NodejsFunction(this, 'func', {
-      timeout: Duration.seconds(30),
+      timeout: cdk.Duration.seconds(30),
       environment: {
         BUCKET: bucket.bucketName,
         WEBHOOK_NAME: webhookName,
