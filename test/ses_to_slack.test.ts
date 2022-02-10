@@ -1,9 +1,9 @@
 import { countResources, expect as expectCDK, haveResource } from '@aws-cdk/assert';
-import { App } from 'aws-cdk-lib';
+import * as cdk from '@aws-cdk/core';
 import * as SesToSlack from '../lib/ses_to_slack-stack';
 
 test('Stack', () => {
-  const app = new App();
+  const app = new cdk.App();
   // WHEN
   const stack = new SesToSlack.SesToSlackStack(app, 'MyTestStack');
   // THEN
