@@ -41,4 +41,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Deploy
         if: startsWith(github.ref, 'refs/heads/main')
-        run: npm run deploy:prod -- --role-arn ${{ secrets.AWS_DEPLOY_ROLE }} --verbose
+        run: npm run deploy:prod -- --verbose
