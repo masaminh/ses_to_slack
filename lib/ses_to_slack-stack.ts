@@ -1,15 +1,16 @@
-import * as cdk from '@aws-cdk/core';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as lambdaNodejs from '@aws-cdk/aws-lambda-nodejs';
-import * as ses from '@aws-cdk/aws-ses';
-import * as sesActions from '@aws-cdk/aws-ses-actions';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as sqs from '@aws-cdk/aws-sqs';
-import * as cloudfront from '@aws-cdk/aws-cloudfront';
+import { Construct } from 'constructs';
+import * as cdk from 'aws-cdk-lib';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as lambdaNodejs from 'aws-cdk-lib/aws-lambda-nodejs';
+import * as ses from 'aws-cdk-lib/aws-ses';
+import * as sesActions from 'aws-cdk-lib/aws-ses-actions';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import config from 'config';
 
 export class SesToSlackStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     const ruleSetName = config.get<string>('ruleSetName');
@@ -55,6 +56,9 @@ export class SesToSlackStack extends cdk.Stack {
         CDN_DOMAIN: distribution.distributionDomainName,
       },
       tracing: lambda.Tracing.ACTIVE,
+      bundling: {
+        forceDockerBundling: false,
+      },
     });
 
     bucket.grantRead(lambdaFunction);
