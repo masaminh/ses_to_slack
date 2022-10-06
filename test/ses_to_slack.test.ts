@@ -1,5 +1,5 @@
 import { countResources, expect as expectCDK, haveResource } from '@aws-cdk/assert';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
 import * as SesToSlack from '../lib/ses_to_slack-stack';
 
 test('Stack', () => {
