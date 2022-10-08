@@ -24,11 +24,26 @@ export class SesToSlackStack extends cdk.Stack {
       lifecycleRules: [
         {
           expiration: cdk.Duration.days(30),
+          noncurrentVersionExpiration: cdk.Duration.days(7),
         },
       ],
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      enforceSSL: true,
+      versioned: true,
     });
-    const bucketCdn = new s3.Bucket(this, 's3Cdn', { blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL });
+    const bucketCdn = new s3.Bucket(this, 's3Cdn', {
+      lifecycleRules: [
+        {
+          expiration: cdk.Duration.days(90),
+          noncurrentVersionExpiration: cdk.Duration.days(7),
+        },
+      ],
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      enforceSSL: true,
+      versioned: true,
+    });
 
     const oai = new cloudfront.OriginAccessIdentity(this, 'oai');
 

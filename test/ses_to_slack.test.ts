@@ -13,6 +13,9 @@ test('Stack', () => {
       Rules: [
         {
           ExpirationInDays: 30,
+          NoncurrentVersionExpiration: {
+            NoncurrentDays: 7,
+          },
           Status: 'Enabled',
         },
       ],
@@ -22,6 +25,41 @@ test('Stack', () => {
       BlockPublicPolicy: true,
       IgnorePublicAcls: true,
       RestrictPublicBuckets: true,
+    },
+    BucketEncryption: {
+      ServerSideEncryptionConfiguration: [
+        { ServerSideEncryptionByDefault: { SSEAlgorithm: 'AES256' } },
+      ],
+    },
+    VersioningConfiguration: {
+      Status: 'Enabled',
+    },
+  }));
+  expectCDK(stack).to(haveResource('AWS::S3::Bucket', {
+    LifecycleConfiguration: {
+      Rules: [
+        {
+          ExpirationInDays: 90,
+          NoncurrentVersionExpiration: {
+            NoncurrentDays: 7,
+          },
+          Status: 'Enabled',
+        },
+      ],
+    },
+    PublicAccessBlockConfiguration: {
+      BlockPublicAcls: true,
+      BlockPublicPolicy: true,
+      IgnorePublicAcls: true,
+      RestrictPublicBuckets: true,
+    },
+    BucketEncryption: {
+      ServerSideEncryptionConfiguration: [
+        { ServerSideEncryptionByDefault: { SSEAlgorithm: 'AES256' } },
+      ],
+    },
+    VersioningConfiguration: {
+      Status: 'Enabled',
     },
   }));
 });
