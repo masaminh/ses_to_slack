@@ -62,4 +62,7 @@ test('Stack', () => {
       Status: 'Enabled',
     },
   }));
+  expectCDK(stack).to(haveResource('AWS::Lambda::Function', {
+    Runtime: 'nodejs18.x',
+  }));
 });

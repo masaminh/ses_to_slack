@@ -71,9 +71,7 @@ export class SesToSlackStack extends cdk.Stack {
         CDN_DOMAIN: distribution.distributionDomainName,
       },
       tracing: lambda.Tracing.ACTIVE,
-      bundling: {
-        forceDockerBundling: false,
-      },
+      runtime: lambda.Runtime.NODEJS_18_X,
     });
 
     bucket.grantRead(lambdaFunction);
