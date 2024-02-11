@@ -1,6 +1,7 @@
 import type * as lambda from 'aws-lambda';
 import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { SQSClient, SendMessageBatchRequestEntry, SendMessageBatchCommand } from '@aws-sdk/client-sqs';
+import { Readable } from 'stream';
 import MessageFormatter from './lambda/message_formatter';
 
 export const handler: lambda.SESHandler = async (event) => {
@@ -22,7 +23,11 @@ export const handler: lambda.SESHandler = async (event) => {
         new GetObjectCommand({ Bucket: bucketName, Key: messageId }),
       );
 
-      const messageInfo = await MessageFormatter.format(output.Body);
+      if (!output.Body) {
+        throw new Error('Body is empty.');
+      }
+
+      const messageInfo = await MessageFormatter.format(output.Body as Readable);
       const imageInfos = messageInfo.attachments.filter((x) => x.contentType.startsWith('image/'));
       imageInfos.forEach((x) => {
         s3.send(
