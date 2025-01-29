@@ -10,3 +10,5 @@ cdk.out
 /config
 /testdata
 /coverage
+/test/__snapshots__
+/test/snapshot.test.ts

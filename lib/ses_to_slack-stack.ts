@@ -8,6 +8,7 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as sqs from 'aws-cdk-lib/aws-sqs';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import config from 'config';
+import { S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
 
 export class SesToSlackStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -47,18 +48,11 @@ export class SesToSlackStack extends cdk.Stack {
 
     const oai = new cloudfront.OriginAccessIdentity(this, 'oai');
 
-    const distribution = new cloudfront.CloudFrontWebDistribution(this, 'distribution', {
-      originConfigs: [
-        {
-          s3OriginSource: {
-            s3BucketSource: bucketCdn,
-            originAccessIdentity: oai,
-          },
-          behaviors: [
-            { isDefaultBehavior: true },
-          ],
-        },
-      ],
+    const distribution = new cloudfront.Distribution(this, 'distribution', {
+      priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
+      defaultBehavior: {
+        origin: S3BucketOrigin.withOriginAccessIdentity(bucketCdn, { originAccessIdentity: oai }),
+      },
     });
 
     const lambdaFunction = new lambdaNodejs.NodejsFunction(this, 'func', {
