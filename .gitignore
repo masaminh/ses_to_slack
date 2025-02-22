@@ -7,8 +7,7 @@ node_modules
 .cdk.staging
 cdk.out
 
-/config
+/config/*.yaml
+!/config/test.yaml
 /testdata
 /coverage
-/test/__snapshots__
-/test/snapshot.test.ts
