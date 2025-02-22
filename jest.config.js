@@ -6,4 +6,5 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
   maxWorkers: 10,
+  snapshotSerializers: ['<rootDir>/test/snapshot-plugin.ts'],
 };

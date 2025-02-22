@@ -1,0 +1,7 @@
+stage: Test
+ruleSetName: default-rule-set
+recipient: test@example.com
+webhook: Webhook
+queue: https://sqs.ap-northeast-1.amazonaws.com/123456789012/Queue
+queuearn: arn:aws:sqs:ap-northeast-1:123456789012:Queue
+ 
