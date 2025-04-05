@@ -8,7 +8,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest --coverage",
-    "pretest": "NODE_ENV=test AWS_DEFAULT_REGION=us-east-1 npm run synth",
+    "pretest": "NODE_ENV=test AWS_DEFAULT_REGION=us-east-1 npm run synth > /dev/null",
     "cdk": "cdk",
     "synth": "cdk synth",
     "deploy:prod": "NODE_ENV=production AWS_DEFAULT_REGION=us-east-1 cdk deploy",
