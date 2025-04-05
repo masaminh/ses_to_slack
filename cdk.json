@@ -2,6 +2,7 @@
   "app": "npx ts-node --prefer-ts-exts bin/ses_to_slack.ts",
   "requireApproval": "never",
   "context": {
-    "@aws-cdk/aws-iam:oidcRejectUnauthorizedConnections": true
+    "@aws-cdk/aws-iam:oidcRejectUnauthorizedConnections": true,
+    "@aws-cdk/cognito:logUserPoolClientSecretValue": false
   }
 }
