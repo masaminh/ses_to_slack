@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'node:fs'
 import MessageFormatter from '../../lib/lambda/message_formatter'
 
 describe('MessageFormatter', () => {

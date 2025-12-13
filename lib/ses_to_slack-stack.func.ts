@@ -1,7 +1,7 @@
 import type * as lambda from 'aws-lambda'
 import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3'
 import { SQSClient, SendMessageBatchRequestEntry, SendMessageBatchCommand } from '@aws-sdk/client-sqs'
-import { Readable } from 'stream'
+import { Readable } from 'node:stream'
 import MessageFormatter from './lambda/message_formatter'
 
 export const handler: lambda.SESHandler = async (event) => {

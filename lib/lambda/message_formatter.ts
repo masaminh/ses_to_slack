@@ -12,7 +12,7 @@ interface MessageInfo {
   attachments: Attachment[];
 }
 
-export default class {
+export default class MessageFormatter {
   public static async format (source: Source): Promise<MessageInfo> {
     const parsed = await simpleParser(source)
     const { subject, from, text } = parsed
