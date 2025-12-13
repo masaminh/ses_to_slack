@@ -1,13 +1,13 @@
-import { countResources, expect as expectCDK, haveResource } from '@aws-cdk/assert';
-import * as cdk from 'aws-cdk-lib';
-import * as SesToSlack from '../lib/ses_to_slack-stack';
+import { countResources, expect as expectCDK, haveResource } from '@aws-cdk/assert'
+import * as cdk from 'aws-cdk-lib'
+import * as SesToSlack from '../lib/ses_to_slack-stack'
 
 test('Stack', () => {
-  const app = new cdk.App();
+  const app = new cdk.App()
   // WHEN
-  const stack = new SesToSlack.SesToSlackStack(app, 'MyTestStack');
+  const stack = new SesToSlack.SesToSlackStack(app, 'MyTestStack')
   // THEN
-  expectCDK(stack).to(countResources('AWS::SES::ReceiptRule', 1));
+  expectCDK(stack).to(countResources('AWS::SES::ReceiptRule', 1))
   expectCDK(stack).to(haveResource('AWS::S3::Bucket', {
     LifecycleConfiguration: {
       Rules: [
@@ -34,7 +34,7 @@ test('Stack', () => {
     VersioningConfiguration: {
       Status: 'Enabled',
     },
-  }));
+  }))
   expectCDK(stack).to(haveResource('AWS::S3::Bucket', {
     LifecycleConfiguration: {
       Rules: [
@@ -61,8 +61,8 @@ test('Stack', () => {
     VersioningConfiguration: {
       Status: 'Enabled',
     },
-  }));
+  }))
   expectCDK(stack).to(haveResource('AWS::Lambda::Function', {
     Runtime: 'nodejs20.x',
-  }));
-});
+  }))
+})

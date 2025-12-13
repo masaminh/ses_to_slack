@@ -1,25 +1,25 @@
-import { Construct } from 'constructs';
-import * as cdk from 'aws-cdk-lib';
-import * as lambda from 'aws-cdk-lib/aws-lambda';
-import * as lambdaNodejs from 'aws-cdk-lib/aws-lambda-nodejs';
-import * as ses from 'aws-cdk-lib/aws-ses';
-import * as sesActions from 'aws-cdk-lib/aws-ses-actions';
-import * as s3 from 'aws-cdk-lib/aws-s3';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
-import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
-import config from 'config';
-import { S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins';
+import { Construct } from 'constructs'
+import * as cdk from 'aws-cdk-lib'
+import * as lambda from 'aws-cdk-lib/aws-lambda'
+import * as lambdaNodejs from 'aws-cdk-lib/aws-lambda-nodejs'
+import * as ses from 'aws-cdk-lib/aws-ses'
+import * as sesActions from 'aws-cdk-lib/aws-ses-actions'
+import * as s3 from 'aws-cdk-lib/aws-s3'
+import * as sqs from 'aws-cdk-lib/aws-sqs'
+import * as cloudfront from 'aws-cdk-lib/aws-cloudfront'
+import config from 'config'
+import { S3BucketOrigin } from 'aws-cdk-lib/aws-cloudfront-origins'
 
 export class SesToSlackStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
+  constructor (scope: Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props)
 
-    const ruleSetName = config.get<string>('ruleSetName');
-    const recipient = config.get<string>('recipient');
-    const stage = config.get<string>('stage');
-    const webhookName = config.get<string>('webhook');
-    const queueUrl = config.get<string>('queue');
-    const queueArn = config.get<string>('queuearn');
+    const ruleSetName = config.get<string>('ruleSetName')
+    const recipient = config.get<string>('recipient')
+    const stage = config.get<string>('stage')
+    const webhookName = config.get<string>('webhook')
+    const queueUrl = config.get<string>('queue')
+    const queueArn = config.get<string>('queuearn')
 
     const bucket = new s3.Bucket(this, 's3', {
       lifecycleRules: [
@@ -32,7 +32,7 @@ export class SesToSlackStack extends cdk.Stack {
       encryption: s3.BucketEncryption.S3_MANAGED,
       enforceSSL: true,
       versioned: true,
-    });
+    })
     const bucketCdn = new s3.Bucket(this, 's3Cdn', {
       lifecycleRules: [
         {
@@ -44,16 +44,16 @@ export class SesToSlackStack extends cdk.Stack {
       encryption: s3.BucketEncryption.S3_MANAGED,
       enforceSSL: true,
       versioned: true,
-    });
+    })
 
-    const oai = new cloudfront.OriginAccessIdentity(this, 'oai');
+    const oai = new cloudfront.OriginAccessIdentity(this, 'oai')
 
     const distribution = new cloudfront.Distribution(this, 'distribution', {
       priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
       defaultBehavior: {
         origin: S3BucketOrigin.withOriginAccessIdentity(bucketCdn, { originAccessIdentity: oai }),
       },
-    });
+    })
 
     const lambdaFunction = new lambdaNodejs.NodejsFunction(this, 'func', {
       timeout: cdk.Duration.seconds(30),
@@ -66,15 +66,15 @@ export class SesToSlackStack extends cdk.Stack {
       },
       tracing: lambda.Tracing.ACTIVE,
       runtime: lambda.Runtime.NODEJS_20_X,
-    });
+    })
 
-    bucket.grantRead(lambdaFunction);
-    bucketCdn.grantWrite(lambdaFunction);
+    bucket.grantRead(lambdaFunction)
+    bucketCdn.grantWrite(lambdaFunction)
 
-    const queue = sqs.Queue.fromQueueArn(this, 'queue', queueArn);
-    queue.grantSendMessages(lambdaFunction);
+    const queue = sqs.Queue.fromQueueArn(this, 'queue', queueArn)
+    queue.grantSendMessages(lambdaFunction)
 
-    const ruleSet = ses.ReceiptRuleSet.fromReceiptRuleSetName(this, 'ruleset', ruleSetName);
+    const ruleSet = ses.ReceiptRuleSet.fromReceiptRuleSetName(this, 'ruleset', ruleSetName)
     ruleSet.addRule('rule', {
       receiptRuleName: `ToSlackRule${stage}`,
       recipients: [recipient],
@@ -86,6 +86,6 @@ export class SesToSlackStack extends cdk.Stack {
           function: lambdaFunction,
         }),
       ],
-    });
+    })
   }
 }

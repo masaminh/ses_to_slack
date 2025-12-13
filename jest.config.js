@@ -7,4 +7,4 @@ module.exports = {
   },
   maxWorkers: 10,
   snapshotSerializers: ['<rootDir>/test/snapshot-plugin.ts'],
-};
+}
