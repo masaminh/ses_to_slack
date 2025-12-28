@@ -28,11 +28,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Copy config
+        env:
+          CONFIG_URI: ${{ secrets.CONFIG_URI }}
         run: |
-          aws s3 sync ${{ secrets.CONFIG_URI }} config
+          aws s3 sync "$CONFIG_URI" config
       - name: Copy testdata
+        env:
+          UNITTESTDATA_URI: ${{ secrets.UNITTESTDATA_URI }}
         run: |
-          aws s3 sync ${{ secrets.UNITTESTDATA_URI }} testdata
+          aws s3 sync "$UNITTESTDATA_URI" testdata
       - name: Test
         run: npm run test
       - name: Deploy
