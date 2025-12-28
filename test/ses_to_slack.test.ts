@@ -63,6 +63,6 @@ test('Stack', () => {
     },
   }))
   expectCDK(stack).to(haveResource('AWS::Lambda::Function', {
-    Runtime: 'nodejs20.x',
+    Runtime: 'nodejs24.x',
   }))
 })
