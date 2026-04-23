@@ -1,9 +1,8 @@
 import fs from 'node:fs'
+import { describe, expect, test } from 'vitest'
 import MessageFormatter from '../../lib/lambda/message_formatter'
 
 describe('MessageFormatter', () => {
-  jest.setTimeout(10000)
-
   test.each`
     sourceFile                  | expectedFile
     ${'testdata/message-1.eml'} | ${'testdata/message-1-expected.json'}
