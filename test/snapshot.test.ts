@@ -1,5 +1,6 @@
 import * as cdk from 'aws-cdk-lib'
 import { Template } from 'aws-cdk-lib/assertions'
+import { expect, test } from 'vitest'
 import { SesToSlackStack } from '../lib/ses_to_slack-stack'
 
 test('snapshot test', () => {
