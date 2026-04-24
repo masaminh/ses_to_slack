@@ -4,6 +4,10 @@
   "bin": {
     "ses_to_slack": "bin/ses_to_slack.js"
   },
+  "engines": {
+    "node": "^24.0.0",
+    "npm": "^11.0.0"
+  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
