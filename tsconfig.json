@@ -22,10 +22,16 @@
     "typeRoots": [
       "./node_modules/@types"
     ],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outDir": "./dist"
   },
   "exclude": [
     "node_modules",
-    "cdk.out"
+    "cdk.out",
+    "dist"
+  ],
+  "include": [
+    "bin/**/*.ts",
+    "lib/**/*.ts"
   ]
 }
