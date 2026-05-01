@@ -21,7 +21,7 @@
     "destroy:dev": "NODE_ENV=develop AWS_DEFAULT_REGION=us-east-1 cdk destroy"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.133",
+    "@types/aws-lambda": "^8.10.161",
     "@types/config": "3.3.3",
     "@types/imap": "^0.8.40",
     "@types/mailparser": "^3.4.4",
