@@ -40,7 +40,7 @@
   "dependencies": {
     "@aws-cdk/assert": "^2.68.0",
     "@aws-sdk/client-s3": "^3.1040.0",
-    "@aws-sdk/client-sqs": "^3.1040.0",
+    "@aws-sdk/client-sqs": "^3.1043.0",
     "aws-cdk-lib": "^2.245.0",
     "config": "^3.3.12",
     "constructs": "^10.4.4",
