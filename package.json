@@ -24,7 +24,7 @@
     "@types/aws-lambda": "^8.10.161",
     "@types/config": "3.3.3",
     "@types/imap": "^0.8.43",
-    "@types/mailparser": "^3.4.4",
+    "@types/mailparser": "^3.4.6",
     "@types/node": "^24.12.4",
     "@types/uuid": "^9.0.8",
     "@vitest/coverage-v8": "^4.1.7",
