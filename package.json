@@ -46,6 +46,6 @@
     "constructs": "^10.6.0",
     "mailparser": "^3.9.11",
     "source-map-support": "^0.5.21",
-    "uuid": "^14.0.0"
+    "uuid": "^14.0.1"
   }
 }
