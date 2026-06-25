@@ -12,5 +12,32 @@ updates:
     open-pull-requests-limit: 5
     cooldown:
       semver-major-days: 7
-      semver-minor-days: 0
-      semver-patch-days: 0
+      semver-minor-days: 1
+      semver-patch-days: 1
+    groups:
+      aws-sdk:
+        patterns:
+          - "@aws-sdk/*"
+      aws-cdk:
+        patterns:
+          - "aws-cdk-lib"
+          - "aws-cdk"
+          - "@aws-cdk/*"
+          - "constructs"
+        update-types:
+          - "minor"
+          - "patch"
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+        update-types:
+          - "minor"
+          - "patch"
+      types:
+        dependency-type: "development"
+        patterns:
+          - "@types/*"
+        update-types:
+          - "minor"
+          - "patch"
