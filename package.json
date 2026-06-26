@@ -34,7 +34,7 @@
     "eslint-config-flat-gitignore": "^2.3.0",
     "neostandard": "^0.13.0",
     "ts-node": "^10.9.2",
-    "typescript": "~5.9.3",
+    "typescript": "~6.0.3",
     "vitest": "^4.1.9"
   },
   "dependencies": {
