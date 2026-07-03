@@ -1,5 +1,5 @@
 import { simpleParser, Source } from 'mailparser'
-import * as uuid from 'uuid'
+import { randomUUID } from 'node:crypto'
 
 interface Attachment {
   contentType: string;
@@ -22,7 +22,7 @@ export default class MessageFormatter {
     return {
       text: messageText,
       attachments: parsed.attachments.map((x) => (
-        { contentType: x.contentType, content: x.content, fileName: x.filename ?? uuid.v4() })),
+        { contentType: x.contentType, content: x.content, fileName: x.filename ?? randomUUID() })),
     }
   }
 }
