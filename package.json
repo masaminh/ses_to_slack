@@ -27,7 +27,7 @@
     "@types/mailparser": "^3.4.6",
     "@types/node": "^24.13.3",
     "@vitest/coverage-v8": "^4.1.10",
-    "aws-cdk": "^2.1132.0",
+    "aws-cdk": "^2.1132.1",
     "esbuild": "^0.28.1",
     "eslint": "^9",
     "eslint-config-flat-gitignore": "^2.3.0",
@@ -40,9 +40,9 @@
     "@aws-cdk/assert": "^2.68.0",
     "@aws-sdk/client-s3": "^3.1091.0",
     "@aws-sdk/client-sqs": "^3.1091.0",
-    "aws-cdk-lib": "^2.260.0",
+    "aws-cdk-lib": "^2.262.0",
     "config": "^4.4.1",
-    "constructs": "^10.7.0",
+    "constructs": "^10.7.1",
     "mailparser": "^3.9.14",
     "source-map-support": "^0.5.21"
   }
