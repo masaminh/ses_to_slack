@@ -29,7 +29,7 @@
     "@vitest/coverage-v8": "^4.1.10",
     "aws-cdk": "^2.1132.1",
     "esbuild": "^0.28.1",
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-config-flat-gitignore": "^2.3.0",
     "neostandard": "^0.13.0",
     "ts-node": "^10.9.2",
