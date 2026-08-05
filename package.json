@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@aws-cdk/assert": "^2.68.0",
-    "@aws-sdk/client-s3": "^3.1096.0",
-    "@aws-sdk/client-sqs": "^3.1096.0",
+    "@aws-sdk/client-s3": "^3.1102.0",
+    "@aws-sdk/client-sqs": "^3.1102.0",
     "aws-cdk-lib": "^2.262.1",
     "config": "^4.4.1",
     "constructs": "^10.7.1",
