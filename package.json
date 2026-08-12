@@ -28,7 +28,7 @@
     "@types/node": "^24.13.3",
     "@vitest/coverage-v8": "^4.1.10",
     "aws-cdk": "^2.1135.0",
-    "esbuild": "^0.28.1",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
     "eslint-config-flat-gitignore": "^2.3.0",
     "neostandard": "^0.13.0",
