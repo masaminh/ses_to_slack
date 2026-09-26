@@ -31,9 +31,6 @@ updates:
         patterns:
           - "vitest"
           - "@vitest/*"
-        update-types:
-          - "minor"
-          - "patch"
       types:
         dependency-type: "development"
         patterns:
