@@ -24,7 +24,7 @@
     "@types/aws-lambda": "^8.10.164",
     "@types/config": "4.4.0",
     "@types/imap": "^0.8.43",
-    "@types/mailparser": "^3.4.6",
+    "@types/mailparser": "^3.9.0",
     "@types/node": "^24.19.0",
     "@vitest/coverage-v8": "^5.0.2",
     "aws-cdk": "^2.1143.0",
@@ -43,7 +43,7 @@
     "aws-cdk-lib": "^2.270.0",
     "config": "^5.0.1",
     "constructs": "^10.8.1",
-    "mailparser": "^3.9.28",
+    "mailparser": "^3.9.36",
     "source-map-support": "^0.5.21"
   }
 }
