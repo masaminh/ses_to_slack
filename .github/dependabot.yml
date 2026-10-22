@@ -31,6 +31,14 @@ updates:
         patterns:
           - "vitest"
           - "@vitest/*"
+      # neostandard は eslint を peer 指定しているため、eslint のメジャー更新も
+      # neostandard と同じ PR で上げる
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "eslint-*"
+          - "neostandard"
       types:
         dependency-type: "development"
         patterns:
