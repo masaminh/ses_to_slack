@@ -11,6 +11,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run --coverage",
     "pretest": "NODE_ENV=test AWS_DEFAULT_REGION=us-east-1 npm run synth > /dev/null",
     "cdk": "cdk",

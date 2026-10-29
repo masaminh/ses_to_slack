@@ -36,7 +36,7 @@ jobs:
         run: |
           aws s3 sync "$UNITTESTDATA_URI" testdata
       - name: Type check
-        run: npx tsc --noEmit
+        run: npm run typecheck
       - name: Test
         run: npm run test
       - name: Deploy
