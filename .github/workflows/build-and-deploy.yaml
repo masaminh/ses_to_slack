@@ -35,6 +35,8 @@ jobs:
           UNITTESTDATA_URI: ${{ secrets.UNITTESTDATA_URI }}
         run: |
           aws s3 sync "$UNITTESTDATA_URI" testdata
+      - name: Type check
+        run: npx tsc --noEmit
       - name: Test
         run: npm run test
       - name: Deploy
