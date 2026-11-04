@@ -27,7 +27,7 @@
     "@types/imap": "^0.8.43",
     "@types/mailparser": "^3.9.0",
     "@types/node": "^24.19.2",
-    "@vitest/coverage-v8": "^5.0.5",
+    "@vitest/coverage-v8": "^5.1.0",
     "aws-cdk": "^2.1146.1",
     "esbuild": "^0.28.2",
     "eslint": "^10.13.0",
